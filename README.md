@@ -1,2 +1,2 @@
 # kropbox
-dropbox clone
+A cloud file saving app.
