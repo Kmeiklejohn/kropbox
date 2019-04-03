@@ -15,7 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from Kropbox import views
+from django.conf import settings
+from Kropbox.models import *
+from Kropbox.views import signup_view, login_view, logout_view, home_view, profile_view
+
+
+admin.site.register(KropboxUser)
+admin.site.register(Submission)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.home_view, name='home'),
+    path('signup/', views.signup_view, name='signup'),
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
+    path('profile/<int:twitteruser_id>', views.profile_view, name='profile'),
 ]
