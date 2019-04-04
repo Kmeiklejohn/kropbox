@@ -25,4 +25,4 @@ class Submission(models.Model):
         return self.author.user.username
 
     class Meta:
-        ordering = ('-tweetTime',)
+        ordering = ('-submitTime',)
