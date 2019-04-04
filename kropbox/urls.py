@@ -18,7 +18,9 @@ from django.urls import path
 from kropbox.profile import views
 from django.conf import settings
 from kropbox.profile.models import *
-from kropbox.profile.views import signup_view, login_view, logout_view, home_view, profile_view
+# from kropbox.profile.views import signup_view, login_view, logout_view, home_view, profile_view
+from kropbox.profile import views as profile_views
+
 
 
 admin.site.register(KropboxUser)
@@ -26,9 +28,9 @@ admin.site.register(Submission)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home_view, name='home'),
-    path('signup/', views.signup_view, name='signup'),
-    path('login/', views.login_view, name='login'),
-    path('logout/', views.logout_view, name='logout'),
-    path('profile/<int:kropboxuser_id>', views.profile_view, name='profile'),
+    path('', profile_views.home_view, name='home'),
+    path('signup/', profile_views.signup_view, name='signup'),
+    path('login/', profile_views.login_view, name='login'),
+    path('logout/', profile_views.logout_view, name='logout'),
+    path('profile/<int:kropboxuser_id>', profile_views.profile_view, name='profile'),
 ]
