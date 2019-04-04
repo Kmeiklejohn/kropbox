@@ -4,9 +4,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
-from django.shortcuts import reverse
-
-from kropbox.profile.models import KropboxUser, Submission
+from django.shortcuts import reverse 
+from kropbox.profile.models import KropboxUser
 from kropbox.profile.forms import SignupForm, LoginForm
 
 def signup_view(request):
@@ -58,25 +57,18 @@ def logout_view(request):
 @login_required()
 def home_view(request):
     items = KropboxUser.objects.all()
-    allSubmissions = Submission.objects.all()
-    currentUser = request.user.kropboxuser
-    mySubmissions = Submission.objects.filter(author=current_user.id)
+    currentUser = request.user
 
     context = {
         'data':items,
-        'currentUser':currentUser,
-        'allSubmissions':allSubmissions,
-        'mySubmissions':mySubmissions,
+        'currentUser':currentUser
     }
     return render(request, 'home.html', context)
 
 @login_required()
 def profile_view(request, kropboxuser_id):
     currentUser = KropboxUser.objects.get(id=kropboxuser_id)
-    mySubmissions = Submission.objects.filter(author=myuser)
     context = {
-        'currentUser':currentUser,
-        'mySubmissions':mySubmissions,
+        'currentUser':currentUser
     }
     return render(request, 'profile.html', context)
-

@@ -15,22 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from kropbox.profile import views
 from django.conf import settings
 from kropbox.profile.models import *
-# from kropbox.profile.views import signup_view, login_view, logout_view, home_view, profile_view
-from kropbox.profile import views as profile_views
+from kropbox.profile.views import signup_view, login_view, logout_view, home_view, profile_view
+from kropbox.manager.models import Folder, FileObject
+from django_mptt_admin.admin import DjangoMpttAdmin
+from kropbox.admin import *
 
-
-
-admin.site.register(KropboxUser)
-admin.site.register(Submission)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', profile_views.home_view, name='home'),
-    path('signup/', profile_views.signup_view, name='signup'),
-    path('login/', profile_views.login_view, name='login'),
-    path('logout/', profile_views.logout_view, name='logout'),
-    path('profile/<int:kropboxuser_id>', profile_views.profile_view, name='profile'),
+    path('', home_view, name='home'),
+    path('signup/', signup_view, name='signup'),
+    path('login/', login_view, name='login'),
+    path('logout/', logout_view, name='logout'),
+    path('profile/<int:kropboxuser_id>', profile_view, name='profile'),
 ]

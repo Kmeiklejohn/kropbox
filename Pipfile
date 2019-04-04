@@ -7,6 +7,8 @@ verify_ssl = true
 
 [packages]
 django = "*"
+django-mptt = "*"
+django-mptt-admin = "*"
 
 [requires]
 python_version = "3.7"
