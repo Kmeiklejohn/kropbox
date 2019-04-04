@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'kropbox.manager',
     'kropbox.profile',
-    'mptt'
+    'mptt',
+    'django_mptt_admin'
 ]
 
 MIDDLEWARE = [
