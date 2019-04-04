@@ -1,23 +1,12 @@
-
-from django.db import models
-from django.contrib.auth.models import User
-
-class Profile(models.Model):
-
-    name = models.CharField(max_length=50)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    
-
 from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
-from django.shortcuts import reverse
-
-from ropbox.models import KropboxUser, Submission
-from kropbox.forms import SignupForm, LoginForm
+from django.shortcuts import reverse 
+from kropbox.profile.models import KropboxUser
+from kropbox.profile.forms import SignupForm, LoginForm
 
 def signup_view(request):
     html = 'genericForm.html'
@@ -68,24 +57,18 @@ def logout_view(request):
 @login_required()
 def home_view(request):
     items = KropboxUser.objects.all()
-    allSubmissions = Submission.objects.all()
-    currentUser = request.user.kropboxuser
-    mySubmissions = Submission.objects.filter(author=current_user.id)
+    currentUser = request.user
 
     context = {
         'data':items,
-        'currentUser':currentUser,
-        'allSubmissions':allSubmissions,
-        'mySubmissions':mySubmissions,
+        'currentUser':currentUser
     }
     return render(request, 'home.html', context)
 
 @login_required()
 def profile_view(request, kropboxuser_id):
     currentUser = KropboxUser.objects.get(id=kropboxuser_id)
-    mySubmissions = Submission.objects.filter(author=myuser)
     context = {
-        'currentUser':currentUser,
-        'mySubmissions':mySubmissions,
+        'currentUser':currentUser
     }
     return render(request, 'profile.html', context)
