@@ -6,8 +6,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import reverse
 
-from ropbox.models import KropboxUser, Submission
-from kropbox.forms import SignupForm, LoginForm
+from kropbox.profile.models import KropboxUser, Submission
+from kropbox.profile.forms import SignupForm, LoginForm
 
 def signup_view(request):
     html = 'genericForm.html'

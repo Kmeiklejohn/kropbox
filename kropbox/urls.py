@@ -15,10 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Kropbox import views
+from kropbox.profile import views
 from django.conf import settings
-from Kropbox.models import *
-from Kropbox.views import signup_view, login_view, logout_view, home_view, profile_view
+from kropbox.profile.models import *
+from kropbox.profile.views import signup_view, login_view, logout_view, home_view, profile_view
 
 
 admin.site.register(KropboxUser)
