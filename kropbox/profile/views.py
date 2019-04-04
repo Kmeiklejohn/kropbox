@@ -1,3 +1,13 @@
+
+from django.db import models
+from django.contrib.auth.models import User
+
+class Profile(models.Model):
+
+    name = models.CharField(max_length=50)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    
+
 from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
@@ -79,4 +89,3 @@ def profile_view(request, kropboxuser_id):
         'mySubmissions':mySubmissions,
     }
     return render(request, 'profile.html', context)
-
