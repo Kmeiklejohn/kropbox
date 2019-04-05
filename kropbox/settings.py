@@ -37,8 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'kropbox.manager',
-    'kropbox.profile',
+    'kropbox',
     'mptt',
     'django_mptt_admin'
 ]
