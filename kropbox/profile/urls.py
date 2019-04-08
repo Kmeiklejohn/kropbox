@@ -5,5 +5,5 @@ urlpatterns = [
     path('', home_view, name="index"),
     path('signup/', signup_view, name='signup'),
     path('login/', login_view, name='login'),
-    path('profile/<int:KropboxUser_id>', profile_view, name='profile')
+    path('profile/', profile_view, name='profile')
 ]

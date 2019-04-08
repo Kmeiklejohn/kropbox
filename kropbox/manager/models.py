@@ -1,6 +1,8 @@
 from django.db import models
 from mptt.models import MPTTModel, TreeForeignKey
 from kropbox.profile.models import KropboxUser
+
+
 class Folder(MPTTModel):
 	parent = TreeForeignKey('self', related_name='children', null=True, blank=True, db_index=True ,on_delete=models.CASCADE)
 	name = models.CharField(max_length=60)
