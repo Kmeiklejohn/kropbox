@@ -54,7 +54,6 @@ def logout_view(request):
     logout(request)
     return HttpResponseRedirect("/")
 
-@login_required()
 def home_view(request):
     items = KropboxUser.objects.all()
     currentUser = request.user
@@ -66,9 +65,26 @@ def home_view(request):
     return render(request, 'home.html', context)
 
 @login_required()
-def profile_view(request, kropboxuser_id):
-    currentUser = KropboxUser.objects.get(id=kropboxuser_id)
+def profile_view(request, KropboxUser_id):
+    selected_user = get_object_or_404(KropboxUser, pk=KropboxUser_id)
+    selected_username= selected_user.username
+    user_list = KropboxUser.objects.all()
+    allstuff = KropboxUser.objects.get(id=KropboxUser_id)
+    user = request.user
+    user_id = request.user.id
+    user2 = request.user.kropboxuser
+    kropbox_user = KropboxUser.username
+
     context = {
-        'currentUser':currentUser
+        'KropboxUser_id': KropboxUser_id,
+        'selected_user': selected_user,
+        'selected_username': selected_username,
+        'KropboxUser': KropboxUser,
+        'user_list': user_list,
+        'allstuff': allstuff,
+        'user': user,
+        'user_id': user_id,
+        'user2': user2,
+        'kropbox_user': kropbox_user,
     }
     return render(request, 'profile.html', context)

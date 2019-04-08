@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>TwitterClone</title>
+        <title>Profile</title>
     </head>
     <body>
 <!DOCTYPE html>
@@ -12,22 +12,28 @@
         <title>Kropbox</title>
     </head>
     <body>
-        <!-- {% include "navbar.html" with current_user=current_user %}
-        {% include "sidebar.html" with current_user=current_user %} -->
         <div>
-            <h1>{{ currentUser }}'s Submissions</h1>
 
+            <h1>{{ selected_user }}'s Submissions</h1>
+            <h2>Your files:</h2>
+            <div>selected_user's files are displayed here.</div>
         </div>
-        <ul>
-            <li>
-                {% for submission in mySubmissions %}
-                <li>
-                    <a href="/singleSubmission/{{ submission.id }}">{{ submission.title }}</a>
-                    <a href="/profile/{{ currentUser.id }}"> by {{ currentUser }} </a>
-                     on {{ submission.submitTime }}
-                </li>
-                {% endfor %}
-            </li>
-        </ul>
+        <br>
+        <div>
+            <h2>Public files:</h2>
+            <div>Public files are displayed here.</div>
+        </div>
+        <br>
+        <div>****************************</div>
+        <div>KropboxUser_id = {{ KropboxUser_id }}</div>
+        <div>selected_user = {{ selected_user }}</div>
+        <div>selected_username = {{ selected_username }}</div>
+        <div>user_list = {{ user_list }}</div>
+        <div>allstuff = {{ allstuff }}</div>
+        <div>user = {{ user }}</div>
+        <div>user_id = {{ user_id }}</div>
+        <div>user2 = {{ user2 }}</div>
+        <div>kropbox_user = {{ kropbox_user }}</div>
+        <div>KropboxUser = {{ KropboxUser }}</div>
     </body>
 </html>
