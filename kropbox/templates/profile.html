@@ -12,13 +12,52 @@
         <title>Kropbox</title>
     </head>
     <body>
-        <div>
 
+
+        <div>
             <h1>{{ selected_user }}'s Submissions</h1>
+            <h2>Your folders:</h2>
+            <div>
+                {% for folder in folder_list %}
+                <li>{{ folder.name }}</li>
+                    <!-- {% for object in object_list %} -->
+                        <!-- <ul>{{ object.name }}</ul> -->
+                    <!-- {% endfor %} -->
+                {% endfor %}
+            </div>
+            **********************
             <h2>Your files:</h2>
-            <div>selected_user's files are displayed here.</div>
+            <div>
+                {% for object in object_list %}
+                <li>{{ object.name }}</li>
+                    <!-- {% for object in object_list %}
+                        <ul>{{ object.name }}</ul>
+                    {% endfor %} -->
+                {% endfor %}
+            </div>
         </div>
-        <br>
+
+
+        <div>
+            {% load mptt_tags %}
+            <ul>
+            ********************
+                {% recursetree folder_list %}
+                    <li>
+                        {{ node.name }}
+                        {% if not node.is_leaf_node %}
+                            <ul class="children">
+                                {{ children }}
+                            </ul>
+                        {% endif %}
+                    </li>
+                {% endrecursetree %}
+            ********************
+            </ul>
+        </div>
+
+
+    <br>
         <div>
             <h2>Public files:</h2>
             <div>Public files are displayed here.</div>
@@ -35,5 +74,7 @@
         <div>user2 = {{ user2 }}</div>
         <div>kropbox_user = {{ kropbox_user }}</div>
         <div>KropboxUser = {{ KropboxUser }}</div>
+        <div>folder_list = {{ folder_list }}</div>
+        <div>object_list = {{ object_list }}</div>
     </body>
 </html>
