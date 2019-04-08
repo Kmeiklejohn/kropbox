@@ -17,17 +17,14 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from kropbox.profile.models import *
-from kropbox.profile.views import signup_view, login_view, logout_view, home_view, profile_view
 from kropbox.manager.models import Folder, FileObject
 from django_mptt_admin.admin import DjangoMpttAdmin
 from kropbox.admin import *
+from kropbox.profile.urls import urlpatterns as profile_urls
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home_view, name='home'),
-    path('signup/', signup_view, name='signup'),
-    path('login/', login_view, name='login'),
-    path('logout/', logout_view, name='logout'),
-    path('profile/<int:kropboxuser_id>', profile_view, name='profile'),
 ]
+
+urlpatterns += profile_urls

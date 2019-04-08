@@ -1,25 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>TwitterClone</title>
+    <title>Kropbox</title>
 </head>
 <body>
-    <!-- {% include "navbar.html" with current_user=current_user %} -->
-    <h3>
-        {{ currentUser }}'s Homepage Content
-    </h3>
-    <h1>
-        What's happening, {{ user }}?
-    </h1>
-    <ul>
-        {% for submission in mySubmissions %}
-        <li>
-            {{ submission.title }}<a href='/profile/{{tweet.author}}'> by {{ submission.author }},</a>
-        </li>
-        {% endfor %}
-    </ul>
-    <!-- {% include "sidebar.html" with current_user=current_user %}
-    {% include "displayTweets.html" with current_user=current_user %} -->
+    <h1>Welcome to Kropbox</h1>
+    <h3>Sign up here!</h3>
+    <form action='/signup' method="GET">
+    <button action='/signup'>
+    Sign Up!
+    </button>
+    </form>
+    <form action='/login' method="GET">
+    <button action='/login'>
+    login!
+    </button>
+    </form>
 </body>
 </html>
