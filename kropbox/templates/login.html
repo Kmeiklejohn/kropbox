@@ -6,7 +6,7 @@
 </head>
 <body>
     <div>
-        <form action="/login/" method="post">
+        <form action="login/" method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" value="Submit" />
@@ -14,7 +14,7 @@
         </form>
         <p>
         <div>Not registered???</div>
-        <a href="/signup/">Sign Up</a>
+        <a href="signup/">Sign Up</a>
         </p>
     </div>
 </body>

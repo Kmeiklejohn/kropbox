@@ -54,7 +54,6 @@ def logout_view(request):
     logout(request)
     return HttpResponseRedirect("/")
 
-@login_required()
 def home_view(request):
     items = KropboxUser.objects.all()
     currentUser = request.user

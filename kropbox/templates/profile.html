@@ -12,22 +12,9 @@
         <title>Kropbox</title>
     </head>
     <body>
-        <!-- {% include "navbar.html" with current_user=current_user %}
-        {% include "sidebar.html" with current_user=current_user %} -->
         <div>
             <h1>{{ currentUser }}'s Submissions</h1>
 
         </div>
-        <ul>
-            <li>
-                {% for submission in mySubmissions %}
-                <li>
-                    <a href="/singleSubmission/{{ submission.id }}">{{ submission.title }}</a>
-                    <a href="/profile/{{ currentUser.id }}"> by {{ currentUser }} </a>
-                     on {{ submission.submitTime }}
-                </li>
-                {% endfor %}
-            </li>
-        </ul>
     </body>
 </html>
