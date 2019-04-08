@@ -7,6 +7,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import reverse 
 from kropbox.profile.models import KropboxUser
 from kropbox.profile.forms import SignupForm, LoginForm
+from kropbox.manager.models import Folder, FileObject
 
 def signup_view(request):
     html = 'genericForm.html'
@@ -74,6 +75,9 @@ def profile_view(request, KropboxUser_id):
     user_id = request.user.id
     user2 = request.user.kropboxuser
     kropbox_user = KropboxUser.username
+    folder_list = Folder.objects.all()
+    object_list = FileObject.objects.all()
+    # folder_object_list
 
     context = {
         'KropboxUser_id': KropboxUser_id,
@@ -86,5 +90,7 @@ def profile_view(request, KropboxUser_id):
         'user_id': user_id,
         'user2': user2,
         'kropbox_user': kropbox_user,
+        'folder_list': folder_list,
+        'object_list': object_list,
     }
     return render(request, 'profile.html', context)
