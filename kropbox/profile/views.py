@@ -24,9 +24,10 @@ def signup_view(request):
             )
             login(request, user)
             KropboxUser.objects.create(
-                user=user,
+                username=data['username'],
+                user=user
             )
-            return HttpResponseRedirect(reverse('home'))
+            return HttpResponseRedirect(reverse('/'))
     else:
         form = SignupForm()
     return render(request, html, {'form': form})
@@ -65,23 +66,21 @@ def home_view(request):
     return render(request, 'home.html', context)
 
 @login_required()
-def profile_view(request, KropboxUser_id):
-    selected_user = get_object_or_404(KropboxUser, pk=KropboxUser_id)
+def profile_view(request):
+    selected_user = get_object_or_404(KropboxUser)
     selected_username= selected_user.username
     user_list = KropboxUser.objects.all()
-    allstuff = KropboxUser.objects.get(id=KropboxUser_id)
+    
     user = request.user
     user_id = request.user.id
     user2 = request.user.kropboxuser
     kropbox_user = KropboxUser.username
 
     context = {
-        'KropboxUser_id': KropboxUser_id,
         'selected_user': selected_user,
         'selected_username': selected_username,
         'KropboxUser': KropboxUser,
         'user_list': user_list,
-        'allstuff': allstuff,
         'user': user,
         'user_id': user_id,
         'user2': user2,
