@@ -3,8 +3,7 @@ from mptt.models import MPTTModel, TreeForeignKey
 from kropbox.profile.models import KropboxUser
 class Folder(MPTTModel):
 	parent = TreeForeignKey('self', related_name='children', null=True, blank=True, db_index=True ,on_delete=models.CASCADE)
-	name = models.CharField(max_length=60, unique=True)
-	folder_type = models.CharField(max_length=60, blank=True)
+	name = models.CharField(max_length=60)
 	owner = models.ForeignKey(KropboxUser, on_delete=models.CASCADE)
 	created_at = models.DateTimeField(auto_now_add=True)
 	
@@ -18,6 +17,7 @@ class Folder(MPTTModel):
 class FileObject(models.Model):
 	folder = TreeForeignKey(Folder, on_delete=models.CASCADE)
 	name = models.CharField(max_length=60)
+	document = models.FileField()
 	created_at = models.DateTimeField(auto_now_add=True)
 	
 	def __str__(self):
