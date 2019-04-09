@@ -35,7 +35,7 @@ class FolderView(View):
 class FileView(View):
     file_form = Add_File
     initial = {'key': 'value'}
-    html = 'genericForm.html'
+    html = 'upload.html'
 
 
     def get(self, request, *args, **kwargs):
