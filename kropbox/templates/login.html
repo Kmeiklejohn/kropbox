@@ -6,7 +6,7 @@
 </head>
 <body>
     <div>
-        <form action="/profile/{{KropboxUser_id}}" method="post">
+        <form action="/profile/" method="POST">
             {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" value="Submit" />

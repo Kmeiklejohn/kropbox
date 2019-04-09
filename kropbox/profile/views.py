@@ -7,6 +7,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import reverse 
 from kropbox.profile.models import KropboxUser
 from kropbox.profile.forms import SignupForm, LoginForm
+from kropbox.manager.models import Folder, FileObject
 
 def signup_view(request):
     html = 'genericForm.html'
@@ -18,18 +19,22 @@ def signup_view(request):
         if form.is_valid():
             data = form.cleaned_data
             user = User.objects.create_user(
-                username=data['username'],
-                password=data['password'],
-                email=data['email']
-            )
+                data['username'],
+                data['email'],
+                data['password'])
             login(request, user)
-            KropboxUser.objects.create(
-                user=user,
+            kropuser = KropboxUser.objects.create(
+                username=data['name'],
+                user=user
             )
-            return HttpResponseRedirect(reverse('home'))
+            Folder.objects.create(
+                name = "home",
+                owner = kropuser
+            )
+            return HttpResponseRedirect(reverse('profile'))
     else:
         form = SignupForm()
-    return render(request, html, {'form': form})
+    return render(request, html , {'form': form})
 
 def login_view(request):
     html = 'login.html'
@@ -39,30 +44,22 @@ def login_view(request):
         form = LoginForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
-            user = authenticate(
-                username=data['username'],
-                password=data['password']
-            )
+            user = authenticate( username=data['username'], password=data['password'])
             if user is not None:
                 login(request, user)
-                return HttpResponseRedirect(request.GET.get('next', '/'))
+                return HttpResponseRedirect(request.GET.get('next', 'profile/'))
     else:
         form = LoginForm()
     return render(request, html, {'form': form})
 
 def logout_view(request):
+
     logout(request)
-    return HttpResponseRedirect("/")
+    return HttpResponseRedirect(request.GET.get('next', '/'))
 
 def home_view(request):
-    items = KropboxUser.objects.all()
-    currentUser = request.user
-
-    context = {
-        'data':items,
-        'currentUser':currentUser
-    }
-    return render(request, 'home.html', context)
+    
+    return render(request, 'home.html')
 
 @login_required()
 def profile_view(request, KropboxUser_id):
@@ -79,8 +76,11 @@ def profile_view(request, KropboxUser_id):
     allstuff = KropboxUser.objects.get(id=KropboxUser_id)
     folder_list = Folder.objects.all()
     user_list = Folder.objects.all().filter(id=user.id)
+    object_list = FileObject.objects.all()
+    # folder_o bject_list"""
 
     context = {
+        'KropboxUser': KropboxUser,
         'user': user,
         'user_id': user_id,
         'user2': user2,
@@ -93,5 +93,6 @@ def profile_view(request, KropboxUser_id):
         'folder_list': folder_list,
         'allstuff': allstuff,
         'user_list': user_list,
+        'object_list': object_list,
     }
     return render(request, 'profile.html', context)
