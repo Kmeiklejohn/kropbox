@@ -66,25 +66,32 @@ def home_view(request):
 
 @login_required()
 def profile_view(request, KropboxUser_id):
+    user = request.user
+    user_id = request.user.id
+    user2 = request.user.kropboxuser
+    KropboxUser = KropboxUser
+    kropbox_user = KropboxUser.username
+    kropbox_user_id = kropbox_user_id.id
+    KropboxUser_id = KropboxUser.id
     selected_user = get_object_or_404(KropboxUser, pk=KropboxUser_id)
     selected_username= selected_user.username
     user_list = KropboxUser.objects.all()
     allstuff = KropboxUser.objects.get(id=KropboxUser_id)
-    user = request.user
-    user_id = request.user.id
-    user2 = request.user.kropboxuser
-    kropbox_user = KropboxUser.username
+    folder_list = Folder.objects.all()
+    user_list = Folder.objects.all().filter(id=user.id)
 
     context = {
-        'KropboxUser_id': KropboxUser_id,
-        'selected_user': selected_user,
-        'selected_username': selected_username,
-        'KropboxUser': KropboxUser,
-        'user_list': user_list,
-        'allstuff': allstuff,
         'user': user,
         'user_id': user_id,
         'user2': user2,
+        'KropboxUser': KropboxUser,
         'kropbox_user': kropbox_user,
+        'kropbox_user_id': kropbox_user_id,
+        'KropboxUser_id': KropboxUser_id,
+        'selected_user': selected_user,
+        'selected_username': selected_username,
+        'folder_list': folder_list,
+        'allstuff': allstuff,
+        'user_list': user_list,
     }
     return render(request, 'profile.html', context)
