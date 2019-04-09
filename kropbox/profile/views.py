@@ -7,6 +7,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import reverse 
 from kropbox.profile.models import KropboxUser
 from kropbox.profile.forms import SignupForm, LoginForm
+from kropbox.manager.models import Folder, FileObject
 
 def signup_view(request):
     html = 'genericForm.html'
@@ -24,9 +25,10 @@ def signup_view(request):
             )
             login(request, user)
             KropboxUser.objects.create(
-                user=user,
+                username=data['username'],
+                user=user
             )
-            return HttpResponseRedirect(reverse('home'))
+            return HttpResponseRedirect(reverse('/'))
     else:
         form = SignupForm()
     return render(request, html, {'form': form})
@@ -65,26 +67,29 @@ def home_view(request):
     return render(request, 'home.html', context)
 
 @login_required()
-def profile_view(request, KropboxUser_id):
-    selected_user = get_object_or_404(KropboxUser, pk=KropboxUser_id)
+def profile_view(request):
+    selected_user = get_object_or_404(KropboxUser)
     selected_username= selected_user.username
     user_list = KropboxUser.objects.all()
-    allstuff = KropboxUser.objects.get(id=KropboxUser_id)
+    
     user = request.user
     user_id = request.user.id
     user2 = request.user.kropboxuser
     kropbox_user = KropboxUser.username
+    folder_list = Folder.objects.all()
+    object_list = FileObject.objects.all()
+    # folder_object_list
 
     context = {
-        'KropboxUser_id': KropboxUser_id,
         'selected_user': selected_user,
         'selected_username': selected_username,
         'KropboxUser': KropboxUser,
         'user_list': user_list,
-        'allstuff': allstuff,
         'user': user,
         'user_id': user_id,
         'user2': user2,
         'kropbox_user': kropbox_user,
+        'folder_list': folder_list,
+        'object_list': object_list,
     }
     return render(request, 'profile.html', context)

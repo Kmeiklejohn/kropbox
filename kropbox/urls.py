@@ -21,10 +21,11 @@ from kropbox.manager.models import Folder, FileObject
 from django_mptt_admin.admin import DjangoMpttAdmin
 from kropbox.admin import *
 from kropbox.profile.urls import urlpatterns as profile_urls
-
+from kropbox.manager.urls import urlpatterns as manager_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 
 urlpatterns += profile_urls
+urlpatterns += manager_urls
