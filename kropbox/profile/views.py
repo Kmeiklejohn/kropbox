@@ -19,19 +19,22 @@ def signup_view(request):
         if form.is_valid():
             data = form.cleaned_data
             user = User.objects.create_user(
-                username=data['username'],
-                password=data['password'],
-                email=data['email']
-            )
+                data['username'],
+                data['email'],
+                data['password'])
             login(request, user)
-            KropboxUser.objects.create(
-                username=data['username'],
+            kropuser = KropboxUser.objects.create(
+                username=data['name'],
                 user=user
             )
-            return HttpResponseRedirect(reverse('/'))
+            Folder.objects.create(
+                name = "home",
+                owner = kropuser
+            )
+            return HttpResponseRedirect(reverse('profile'))
     else:
         form = SignupForm()
-    return render(request, html, {'form': form})
+    return render(request, html , {'form': form})
 
 def login_view(request):
     html = 'login.html'
@@ -41,50 +44,35 @@ def login_view(request):
         form = LoginForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
-            user = authenticate(
-                username=data['username'],
-                password=data['password']
-            )
+            user = authenticate( username=data['username'], password=data['password'])
             if user is not None:
                 login(request, user)
-                return HttpResponseRedirect(request.GET.get('next', '/'))
+                return HttpResponseRedirect(request.GET.get('next', 'profile/'))
     else:
         form = LoginForm()
     return render(request, html, {'form': form})
 
 def logout_view(request):
+
     logout(request)
-    return HttpResponseRedirect("/")
+    return HttpResponseRedirect(request.GET.get('next', '/'))
 
 def home_view(request):
-    items = KropboxUser.objects.all()
-    currentUser = request.user
-
-    context = {
-        'data':items,
-        'currentUser':currentUser
-    }
-    return render(request, 'home.html', context)
+    
+    return render(request, 'home.html')
 
 @login_required()
 def profile_view(request):
-    selected_user = get_object_or_404(KropboxUser)
-    selected_username= selected_user.username
-    user_list = KropboxUser.objects.all()
-    
     user = request.user
     user_id = request.user.id
     user2 = request.user.kropboxuser
     kropbox_user = KropboxUser.username
     folder_list = Folder.objects.all()
     object_list = FileObject.objects.all()
-    # folder_object_list
+    # folder_o bject_list"""
 
     context = {
-        'selected_user': selected_user,
-        'selected_username': selected_username,
         'KropboxUser': KropboxUser,
-        'user_list': user_list,
         'user': user,
         'user_id': user_id,
         'user2': user2,
