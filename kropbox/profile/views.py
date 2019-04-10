@@ -66,19 +66,20 @@ def home_view(request):
 def profile_view(request):
     user = request.user
     user_id = request.user.id
-    user2 = request.user.kropboxuser
     kropbox_user = KropboxUser.name
     folder_list = Folder.objects.all()
+    myfolder_list = Folder.objects.filter(id=user_id)
     object_list = FileObject.objects.all()
-    # folder_o bject_list"""
+    myobject_list = FileObject.objects.filter(id=user_id)
 
     context = {
         'KropboxUser': KropboxUser,
         'user': user,
         'user_id': user_id,
-        'user2': user2,
         'kropbox_user': kropbox_user,
         'folder_list': folder_list,
+        'myfolder_list': myfolder_list,
         'object_list': object_list,
+        'myobject_list': myobject_list,
     }
     return render(request, 'profile.html', context)
