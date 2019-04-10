@@ -30,7 +30,7 @@ class FolderView(View):
           
         return render(request, self.html, {'form':form})
 
-
+#this is a test
 class FileView(View):
     file_form = Add_File
     initial = {'key': 'value'}
