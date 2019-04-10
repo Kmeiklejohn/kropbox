@@ -12,11 +12,11 @@ class FolderView(View):
     html = 'genericForm.html'
 
     def get(self, request, *args, **kwargs):
-        form = self.folder_form(request, initial=self.initial)
+        form = self.folder_form(request.user.kropboxuser, initial=self.initial)
         return render(request, self.html, {'form':form})
 
     def post(self, request, *args, **kwargs):
-        form = self.folder_form(request, request.POST)
+        form = self.folder_form(request.user.kropboxuser, request.POST)
         
         if form.is_valid():
             data = form.cleaned_data
@@ -45,7 +45,7 @@ class FileView(View):
         return render(request, self.html, {'form':form})
     
     def post(self, request, *args, **kwargs):
-        form = self.file_form(request.POST, request.FILES)
+        form = self.file_form(request.user.kropboxuser,request.POST, request.FILES)
         if form.is_valid():
             data = form.cleaned_data
             file_object = FileObject.objects.create(
