@@ -47,7 +47,7 @@ class FileView(View):
         owner = KropboxUser.objects.filter(user=request.user)
         if form.is_valid():
             data = form.cleaned_data
-            file_object = file.objects.create(
+            file_object = file_object.objects.create(
                 folder = data['parent'],
                 name = data['name'],
                 owner = data['owner'])
