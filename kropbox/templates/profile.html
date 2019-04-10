@@ -16,25 +16,34 @@
 
         <div>
             <h1>{{ selected_user }}'s Submissions</h1>
-            <h2>Your folders:</h2>
+
+            <h3>objects in folder_list</h3>
             <div>
                 {% for folder in folder_list %}
                 <li>{{ folder.name }}</li>
-                    <!-- {% for object in object_list %} -->
-                        <!-- <ul>{{ object.name }}</ul> -->
-                    <!-- {% endfor %} -->
                 {% endfor %}
             </div>
             **********************
-            <h2>Your files:</h2>
+            <h3>objects in object_list</h3>
             <div>
                 {% for object in object_list %}
                 <li>{{ object.name }}</li>
-                    <!-- {% for object in object_list %}
-                        <ul>{{ object.name }}</ul>
-                    {% endfor %} -->
                 {% endfor %}
             </div>
+            **********************
+            <h3>objects in myfolder_list</h3>
+            <div>
+                {% for object in myfolder_list %}
+                <li>{{ object.name }}</li>
+                {% endfor %}
+            **********************
+            <h3>objects in myobject_list</h3>
+            <div>
+                {% for object in myobject_list %}
+                <li>{{ object.name }}</li>
+                {% endfor %}
+            </div>
+            **********************
         </div>
 
 
@@ -42,6 +51,7 @@
             {% load mptt_tags %}
             <ul>
             ********************
+            <h3>recursetree folder_list</h3>
                 {% recursetree folder_list %}
                     <li>
                         {{ node.name }}
@@ -55,28 +65,40 @@
             ********************
             </ul>
         </div>
-
-
-    <br>
+        <div>
+            {% load mptt_tags %}
+            <ul>
+            ********************
+            <h3>recursetree myfolder_list</h3>
+                {% recursetree myfolder_list %}
+                    <li>
+                        {{ node.name }}
+                        {% if not node.is_leaf_node %}
+                            <ul class="children">
+                                {{ children }}
+                            </ul>
+                        {% endif %}
+                    </li>
+                {% endrecursetree %}
+            ********************
+            </ul>
+        </div>
+        <br>
         <div>
             <h2>Public files:</h2>
             <div>Public files are displayed here.</div>
         </div>
         <br>
         <div>****************************</div>
-        <div>KropboxUser_id = {{ KropboxUser_id }}</div>
-        <div>selected_user = {{ selected_user }}</div>
-        <div>selected_username = {{ selected_username }}</div>
-        <div>user_list = {{ user_list }}</div>
-        <div>allstuff = {{ allstuff }}</div>
         <div>user = {{ user }}</div>
         <div>user_id = {{ user_id }}</div>
-        <div>user2 = {{ user2 }}</div>
         <div>kropbox_user = {{ kropbox_user }}</div>
-        <div>KropboxUser = {{ KropboxUser }}</div>
+        <div>myfolder_list = {{ myfolder_list }}</div>
         <div>folder_list = {{ folder_list }}</div>
         <div>object_list = {{ object_list }}</div>
+
         <form action='/add_folder/' method="">
+
         {% csrf_token %}
         <button action='/add_folder/'>
         create a folder
