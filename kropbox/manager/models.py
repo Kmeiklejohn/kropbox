@@ -19,7 +19,7 @@ class Folder(MPTTModel):
 class FileObject(models.Model):
 	folder = TreeForeignKey(Folder, on_delete=models.CASCADE)
 	name = models.CharField(max_length=60)
-	document = models.FileField()
+	document = models.FileField(upload_to='documents/%Y/%m/%d')
 	created_at = models.DateTimeField(auto_now_add=True)
 	
 	def __str__(self):
