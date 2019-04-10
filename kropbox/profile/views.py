@@ -66,11 +66,11 @@ def home_view(request):
 def profile_view(request):
     user = request.user
     user_id = request.user.id
-    kropbox_user = KropboxUser.name
+    kropbox_user = request.user.kropboxuser.name
     folder_list = Folder.objects.all()
-    myfolder_list = Folder.objects.filter(id=user_id)
+    myfolder_list = Folder.objects.filter(owner=request.user.kropboxuser)
     object_list = FileObject.objects.all()
-    myobject_list = FileObject.objects.filter(id=user_id)
+    myobject_list = FileObject.objects.filter(owner=request.user.kropboxuser)
 
     context = {
         'KropboxUser': KropboxUser,
