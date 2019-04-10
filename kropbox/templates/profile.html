@@ -76,13 +76,13 @@
         <div>KropboxUser = {{ KropboxUser }}</div>
         <div>folder_list = {{ folder_list }}</div>
         <div>object_list = {{ object_list }}</div>
-        <form action='/add_folder/' method="POST">
+        <form action='/add_folder/' method="">
         {% csrf_token %}
         <button action='/add_folder/'>
         create a folder
         </button>
         </form>
-        <form action='/add_file/' method="POST">
+        <form action='/add_file/' method="" enctype="multipart/form-data">
         {% csrf_token %}
         <button action='/add_file/'>
         add a file
