@@ -16,8 +16,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf import settings
-from kropbox.profile.models import *
-from kropbox.manager.models import Folder, FileObject
 from django_mptt_admin.admin import DjangoMpttAdmin
 from kropbox.admin import *
 from kropbox.profile.urls import urlpatterns as profile_urls

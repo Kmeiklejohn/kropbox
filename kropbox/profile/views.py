@@ -82,3 +82,6 @@ def profile_view(request):
         'object_list': object_list,
     }
     return render(request, 'profile.html', context)
+
+def success_view(request):
+    return render(request, 'success.html')

@@ -11,46 +11,48 @@ class FolderView(View):
     initial = {'key': 'value'}
     html = 'genericForm.html'
 
-
     def get(self, request, *args, **kwargs):
-        form = self.folder_form(initial=self.initial)
+        form = self.folder_form(request, initial=self.initial)
         return render(request, self.html, {'form':form})
 
     def post(self, request, *args, **kwargs):
-        form = self.folder_form(request.POST)
-        owner = KropboxUser.objects.filter(user=request.user)
+        form = self.folder_form(request, request.POST)
+        
         if form.is_valid():
             data = form.cleaned_data
             folder = Folder.objects.create(
                 parent = data['parent'],
                 name = data['name'],
-                owner = data['owner'])
+                owner = request.user.kropboxuser)
+            return render(request, 'success.html')
         else:
             form = Add_Folder
-            if not request.user.is_staff:  
-                form.fields['owner'].queryset= KropboxUser.objects.filter(user=request.user)
+          
         return render(request, self.html, {'form':form})
 
 
 class FileView(View):
     file_form = Add_File
     initial = {'key': 'value'}
-    html = 'genericForm.html'
+    html = 'fileform.html'
 
 
     def get(self, request, *args, **kwargs):
-        form = self.file_form(initial=self.initial)
+        form = self.file_form(request.user.kropboxuser, initial=self.initial)
         return render(request, self.html, {'form':form})
     
     def post(self, request, *args, **kwargs):
-        form = self.file_form(request.POST)
-        owner = KropboxUser.objects.filter(user=request.user)
+        form = self.file_form(request.POST, request.FILES)
         if form.is_valid():
             data = form.cleaned_data
-            file_object = file_object.objects.create(
-                folder = data['parent'],
+            file_object = FileObject.objects.create(
+                folder = data['folder'],
                 name = data['name'],
-                owner = data['owner'])
+                document = request.FILES['document'])
+            return render(request, 'success.html')
         else:
             form = Add_File
         return render(request, self.html, {'form':form})
+
+def success_view(request):
+    return render(request, 'success.html')

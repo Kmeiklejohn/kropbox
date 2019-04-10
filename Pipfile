@@ -9,6 +9,7 @@ verify_ssl = true
 django = "*"
 django-mptt = "*"
 django-mptt-admin = "*"
+django-filter = "*"
 
 [requires]
 python_version = "3.7"
