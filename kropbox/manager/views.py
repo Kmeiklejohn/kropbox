@@ -35,7 +35,7 @@ class FolderView(View):
 class FileView(View):
     file_form = Add_File
     initial = {'key': 'value'}
-    html = 'genericForm.html'
+    html = 'upload.html'
 
 
     def get(self, request, *args, **kwargs):
@@ -47,7 +47,7 @@ class FileView(View):
         owner = KropboxUser.objects.filter(user=request.user)
         if form.is_valid():
             data = form.cleaned_data
-            file_object = file.objects.create(
+            file_object = file_object.objects.create(
                 folder = data['parent'],
                 name = data['name'],
                 owner = data['owner'])

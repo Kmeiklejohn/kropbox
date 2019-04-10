@@ -19,12 +19,12 @@ def signup_view(request):
         if form.is_valid():
             data = form.cleaned_data
             user = User.objects.create_user(
-                data['username'],
-                data['email'],
-                data['password'])
+                email=data['email'],
+                username=data['username'],
+                password=data['password'])
             login(request, user)
             kropuser = KropboxUser.objects.create(
-                username=data['name'],
+                name=data['name'],
                 user=user
             )
             Folder.objects.create(
@@ -36,18 +36,19 @@ def signup_view(request):
         form = SignupForm()
     return render(request, html , {'form': form})
 
-def login_view(request):
-    html = 'login.html'
-    form = None
 
+def login_view(request):
+    html = 'genericForm.html'
+   
     if request.method == "POST":
+    
         form = LoginForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
-            user = authenticate( username=data['username'], password=data['password'])
+            user = authenticate(username=data['username'], password=data['password'])
             if user is not None:
                 login(request, user)
-                return HttpResponseRedirect(request.GET.get('next', 'profile/'))
+                return HttpResponseRedirect(reverse('profile'))
     else:
         form = LoginForm()
     return render(request, html, {'form': form})
