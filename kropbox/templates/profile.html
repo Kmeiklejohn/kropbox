@@ -76,5 +76,23 @@
         <div>KropboxUser = {{ KropboxUser }}</div>
         <div>folder_list = {{ folder_list }}</div>
         <div>object_list = {{ object_list }}</div>
+        <form action='/add_folder/' method="POST">
+        {% csrf_token %}
+        <button action='/add_folder/'>
+        create a folder
+        </button>
+        </form>
+        <form action='/add_file/' method="POST">
+        {% csrf_token %}
+        <button action='/add_file/'>
+        add a file
+        </button>
+        </form>
+       <form action='/logout/' method="GET">
+        <button action='/logout/'>
+        logout
+        </button>
+        </form>
+
     </body>
 </html>
