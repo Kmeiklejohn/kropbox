@@ -17,7 +17,7 @@ class Add_KropboxUser(forms.ModelForm):
             },
         }
 
-class SignupForm(forms.ModelForm):
+class SignupForm(forms.Form):
     name = forms.CharField(max_length=50)
     email = forms.EmailField()
     username = forms.CharField(max_length=50)

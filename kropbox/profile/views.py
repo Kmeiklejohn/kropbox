@@ -87,8 +87,8 @@ def profile_view(request):
 @login_required()
 def document_view(request, fileobject_id):
     document = get_object_or_404(FileObject, pk=fileobject_id)
-    file_object = FileObject.objects.filter(fileobject_id=document)
-    data = {'file':file_object}
+    
+    data = {'file': document}
 
     return render(request, 'document.html', data)
 

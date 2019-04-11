@@ -42,7 +42,7 @@ class FileView(View):
         return render(request, self.html, {'form':form})
     
     def post(self, request, *args, **kwargs):
-        form = self.file_form(request.user.kropboxuser,request.POST, request.FILES)
+        form = self.file_form(request.user.kropboxuser, request.POST, request.FILES)
         if form.is_valid():
             data = form.cleaned_data
             file_object = FileObject.objects.create(
