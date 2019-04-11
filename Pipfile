@@ -10,11 +10,7 @@ django = "*"
 django-mptt = "*"
 django-mptt-admin = "*"
 django-filter = "*"
-dotenv = "*"
 python-dotenv = "*"
-filetransfer = "*"
-filetransfers = "*"
-filetransfers-api = "*"
 
 [requires]
 python_version = "3.7"
