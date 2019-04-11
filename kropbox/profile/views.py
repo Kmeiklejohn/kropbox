@@ -70,13 +70,27 @@ def profile_view(request):
     folder_list = Folder.objects.all()
     myfolder_list = Folder.objects.filter(owner=request.user.kropboxuser)
     object_list = FileObject.objects.all()
-    # myobject_list = FileObject.objects.filter(folder=request.user.kropboxuser.folder)
+    myitem_list = []
+    structure={}
+    
+
+
+    for item in myfolder_list:
+        myitem = FileObject.objects.filter(folder=item)
+        myitem_list.append(myitem)
     myfiles = []
     for folder in myfolder_list:
         myfiles.append(folder.get_children)
     descendantfiles = []
     for folder in myfolder_list:
-        descendantfiles.append(folder.get_descendants)
+        descendantfiles.append(folder.get_descendants(include_self=False))
+    descendantfiles2 = []
+    for folder in myfolder_list:
+        descendantfiles2.append(folder.get_descendants(include_self=True))
+    myobjects = []
+    for file in myfiles:
+        # myobjects.append(file.get_children)
+        myobjects.append(file)
 
     context = {
         'KropboxUser': KropboxUser,
@@ -89,6 +103,9 @@ def profile_view(request):
         # 'myobject_list': myobject_list,
         'myfiles': myfiles,
         'descendantfiles': descendantfiles,
+        'descendantfiles2': descendantfiles2,
+        'myobjects': myobjects,
+        'myitem_list': myitem_list,
     }
     return render(request, 'profile.html', context)
 

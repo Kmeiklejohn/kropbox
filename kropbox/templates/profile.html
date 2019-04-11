@@ -36,15 +36,23 @@
                 {% for object in myfolder_list %}
                 <li>{{ object.name }}</li>
                 {% endfor %}
+            </div>
             **********************
             <h3>objects in myfiles</h3>
             <div>
                 {% for object in myfiles %}
-                    <li>{{ object }}</li>
+                    <!-- <li>{{ object }}</li> -->
                     {% for item in object %}
                         <li>{{ item }}</li>
                     {% endfor %}
                     <div>---------------------</div>
+                {% endfor %}
+            </div>
+            **********************
+            <h3>objects in myobjects</h3>
+            <div>
+                {% for object in myobjects %}
+                    <li>{{ object.name }}</li>
                 {% endfor %}
             </div>
             **********************
@@ -58,12 +66,33 @@
                 {% endfor %}
             </div>
             **********************
+            <h3>objects in descendantfiles2</h3>
+            <div>
+                {% for object in descendantfiles2 %}
+                    <li>{{ object }}</li>
+                    {% for item in object %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+            **********************
+            <h3>objects in myitem_list</h3>
+            <div>
+                {% for object in myitem_list %}
+                    <li>{{ object }}</li>
+                    {% for item in object %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+            **********************
+            
         </div>
         <div>
             {% load mptt_tags %}
             <ul>
             ********************
-            <h3>recursetree folder_list</h3>
+            <h3>recursetree folder_list children</h3>
                 {% recursetree folder_list %}
                     <li>
                         {{ node.name }}
@@ -81,18 +110,19 @@
             {% load mptt_tags %}
             <ul>
             ********************
-            <h3>recursetree myfolder_list</h3>
-                {% recursetree myfolder_list %}
+            <h3>recursetree myfolder_list descendants</h3>
+                {% recursetree myfolder_list  %}
                     <li>
                         {{ node.name }}
                         {% if not node.is_leaf_node %}
-                            <ul class="children">
-                                {{ children }}
+                            <ul class="descendants">
+                                {{ descendants }}
                             </ul>
                         {% endif %}
                     </li>
                 {% endrecursetree %}
             ********************
+           
             </ul>
         </div>
         <br>
@@ -118,6 +148,15 @@
         <div>---</div>
         <div>descendantfiles = {{ descendantfiles }}</div>
         <div>---</div>
+        <div>descendantfiles2 = {{ descendantfiles2 }}</div>
+        <div>---</div>
+        <div>myobjects = {{ myobjects }}</div>
+        <div>---</div>
+        <div>myobject_list = {{ myobject_list }}</div>
+        <div>---</div>
+        <div>myitem_list = {{ myitem_list }}</div>
+        <div>---</div>
+
 
         <form action='/add_folder/' method="">
 
