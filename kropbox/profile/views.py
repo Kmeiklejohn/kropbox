@@ -66,11 +66,53 @@ def home_view(request):
 def profile_view(request):
     user = request.user
     user_id = request.user.id
-    kropbox_user = KropboxUser.name
+    kropbox_user = request.user.kropboxuser.name
     folder_list = Folder.objects.all()
-    myfolder_list = Folder.objects.filter(id=user_id)
+    myfolder_list = Folder.objects.filter(owner=request.user.kropboxuser)
     object_list = FileObject.objects.all()
-    myobject_list = FileObject.objects.filter(id=user_id)
+    # structure={}
+    homefolder = Folder.objects.filter(owner=request.user.kropbox).filter(name=home).first()
+    potentialfolder = Folder.objects.filter(owner=request.user.kropbox).filter(id=id).first()
+    data = {
+        'currentfolder': potentialfolder,
+        'files': FileObject.objects.filter(folder=potentialfolder),
+        'children': potentialfolder.get_children(),
+    }
+
+    
+
+    # for item in myfolder_list:
+    #     myitem = FileObject.objects.filter(folder=item)
+    #     myitem_list.append(myitem)
+    # myfiles = []
+    # for folder in myfolder_list:
+    #     myfiles.append(folder.get_children)
+    # descendantfiles = []
+    # for folder in myfolder_list:
+    #     descendantfiles.append(folder.get_descendants(include_self=False))
+    # descendantfiles2 = []
+    # for folder in myfolder_list:
+    #     descendantfiles2.append(folder.get_descendants(include_self=True))
+    # myobjects = []
+    # for file in myfiles:
+    #     # myobjects.append(file.get_children)
+    #     myobjects.append(file)
+
+    context = {
+        'KropboxUser': KropboxUser,
+        'user': user,
+        'data': data,
+        # 'user_id': user_id,
+        # 'kropbox_user': kropbox_user,
+        # 'folder_list': folder_list,
+        # 'myfolder_list': myfolder_list,
+        # # 'myobject_list': myobject_list,
+        # 'myfiles': myfiles,
+        # 'descendantfiles': descendantfiles,
+        # 'descendantfiles2': descendantfiles2,
+        # 'myobjects': myobjects,
+        # 'myitem_list': myitem_list,
+    }
 
     context = {
         'KropboxUser': KropboxUser,
@@ -80,17 +122,69 @@ def profile_view(request):
         'folder_list': folder_list,
         'myfolder_list': myfolder_list,
         'object_list': object_list,
-        'myobject_list': myobject_list,
+        'myfiles': myfiles,
+        'descendantfiles': descendantfiles,
+        'descendantfiles2': descendantfiles2,
+        'myobjects': myobjects,
+        'myitem_list': myitem_list,
+        'data': data,
+        'homefolder': homefolder,
     }
     return render(request, 'profile.html', context)
 
 @login_required()
-def document_view(request, fileobject_id):
-    document = get_object_or_404(FileObject, pk=fileobject_id)
-    
-    data = {'file': document}
 
-    return render(request, 'document.html', data)
+def folder_view(request, id):
+    user = request.user
+    user_id = request.user.id
+    kropbox_user = request.user.kropboxuser.name
+    folder_list = Folder.objects.all()
+    myfolder_list = Folder.objects.filter(owner=request.user.kropboxuser)
+    object_list = FileObject.objects.all()
+    # structure={}
+    homefolder = Folder.objects.filter(owner=request.user.kropbox).filter(name=home).first()
+    potentialfolder = Folder.objects.filter(owner=request.user.kropbox).filter(id=id).first()
+    data = {
+        'currentfolder': potentialfolder,
+        'files': FileObject.objects.filter(folder=potentialfolder),
+        'children': potentialfolder.get_children(),
+    }
+
+    # for item in myfolder_list:
+    #     myitem = FileObject.objects.filter(folder=item)
+    #     myitem_list.append(myitem)
+    # myfiles = []
+    # for folder in myfolder_list:
+    #     myfiles.append(folder.get_children)
+    # descendantfiles = []
+    # for folder in myfolder_list:
+    #     descendantfiles.append(folder.get_descendants(include_self=False))
+    # descendantfiles2 = []
+    # for folder in myfolder_list:
+    #     descendantfiles2.append(folder.get_descendants(include_self=True))
+    # myobjects = []
+    # for file in myfiles:
+    #     # myobjects.append(file.get_children)
+    #     myobjects.append(file)
+
+    context = {
+        'KropboxUser': KropboxUser,
+        'user': user,
+        'data': data,
+        # 'user_id': user_id,
+        # 'kropbox_user': kropbox_user,
+        # 'folder_list': folder_list,
+        # 'myfolder_list': myfolder_list,
+        # # 'myobject_list': myobject_list,
+        # 'myfiles': myfiles,
+        # 'descendantfiles': descendantfiles,
+        # 'descendantfiles2': descendantfiles2,
+        # 'myobjects': myobjects,
+        # 'myitem_list': myitem_list,
+    }
+    return render(request, 'expand.html', context)
+
+
 
 def success_view(request):
     return render(request, 'success.html')
