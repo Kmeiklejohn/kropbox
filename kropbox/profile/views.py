@@ -133,6 +133,7 @@ def profile_view(request):
     return render(request, 'profile.html', context)
 
 @login_required()
+
 def folder_view(request, id):
     user = request.user
     user_id = request.user.id
@@ -182,6 +183,8 @@ def folder_view(request, id):
         # 'myitem_list': myitem_list,
     }
     return render(request, 'expand.html', context)
+
+
 
 def success_view(request):
     return render(request, 'success.html')
