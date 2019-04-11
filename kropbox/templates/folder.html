@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Profile</title>
+    </head>
+    <body>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Kropbox</title>
+    </head>
+    <body>
+
+
+        <div>
+            <h1>{{ selected_user }}'s Submissions</h1>
+        <br>
+        <div>****************************</div>
+        <div>user = {{ user }}</div>
+        <div>---</div>
+        <div>user_id = {{ user_id }}</div>
+        <div>---</div>
+        <div>kropbox_user = {{ kropbox_user }}</div>
+        <div>---</div>
+        <div>myfolder_list = {{ myfolder_list }}</div>
+        <div>---</div>
+        <div>folder_list = {{ folder_list }}</div>
+        <div>---</div>
+        <div>object_list = {{ object_list }}</div>
+        <div>---</div>
+        <div>myfiles = {{ myfiles }}</div>
+        <div>---</div>
+        <div>descendantfiles = {{ descendantfiles }}</div>
+        <div>---</div>
+        <div>descendantfiles2 = {{ descendantfiles2 }}</div>
+        <div>---</div>
+        <div>myobjects = {{ myobjects }}</div>
+        <div>---</div>
+        <div>myobject_list = {{ myobject_list }}</div>
+        <div>---</div>
+        <div>myitem_list = {{ myitem_list }}</div>
+        <div>---</div>
+
+
+        <form action='/add_folder/' method="">
+
+        {% csrf_token %}
+        <button action='/add_folder/'>
+        create a folder
+        </button>
+        </form>
+        <form action='/add_file/' method="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <button action='/add_file/'>
+        add a file
+        </button>
+        </form>
+       <form action='/logout/' method="GET">
+        <button action='/logout/'>
+        logout
+        </button>
+        </form>
+
+    </body>
+</html>
