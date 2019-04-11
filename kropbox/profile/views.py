@@ -84,5 +84,13 @@ def profile_view(request):
     }
     return render(request, 'profile.html', context)
 
+@login_required()
+def document_view(request, fileobject_id):
+    document = get_object_or_404(FileObject, pk=fileobject_id)
+    
+    data = {'file': document}
+
+    return render(request, 'document.html', data)
+
 def success_view(request):
     return render(request, 'success.html')

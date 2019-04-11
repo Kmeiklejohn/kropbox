@@ -14,15 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include, re_path
 from django.conf import settings
 from django_mptt_admin.admin import DjangoMpttAdmin
 from kropbox.admin import *
 from kropbox.profile.urls import urlpatterns as profile_urls
 from kropbox.manager.urls import urlpatterns as manager_urls
+from kropbox.views import *
+from django.conf.urls import handler404, handler500, url
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls)
 ]
 
 urlpatterns += profile_urls
