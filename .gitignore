@@ -1,6 +1,5 @@
-
-# Created by https://www.gitignore.io/api/macos,django,python,visualstudiocode
-# Edit at https://www.gitignore.io/?templates=macos,django,python,visualstudiocode
+# Created by https://www.gitignore.io/api/venv,ninja,macos,django,python,visualstudiocode
+# Edit at https://www.gitignore.io/?templates=venv,ninja,macos,django,python,visualstudiocode
 
 ### Django ###
 *.log
@@ -163,6 +162,10 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+### Ninja ###
+.ninja_deps
+.ninja_log
+
 ### Python ###
 # Byte-compiled / optimized / DLL files
 
@@ -218,6 +221,18 @@ Temporary Items
 
 # Pyre type checker
 
+### venv ###
+# Virtualenv
+# http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
+[Bb]in
+[Ii]nclude
+[Ll]ib
+[Ll]ib64
+[Ll]ocal
+[Ss]cripts
+pyvenv.cfg
+pip-selfcheck.json
+
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
@@ -229,4 +244,4 @@ Temporary Items
 # Ignore all local history of files
 .history
 
-# End of https://www.gitignore.io/api/macos,django,python,visualstudiocode
+# End of https://www.gitignore.io/api/venv,ninja,macos,django,python,visualstudiocode

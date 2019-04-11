@@ -5,6 +5,7 @@ from kropbox.manager.models import FileObject, Folder
 from kropbox.manager.forms import Add_File, Add_Folder
 from django.views import View
 from kropbox.profile.models import KropboxUser
+from django.contrib.admin.views.decorators import staff_member_required
 
 class FolderView(View):
     folder_form = Add_Folder
@@ -34,11 +35,7 @@ class FolderView(View):
 class FileView(View):
     file_form = Add_File
     initial = {'key': 'value'}
-
     html = 'fileform.html'
-
-
-
 
     def get(self, request, *args, **kwargs):
         form = self.file_form(request.user.kropboxuser, initial=self.initial)
@@ -59,3 +56,14 @@ class FileView(View):
 
 def success_view(request):
     return render(request, 'success.html')
+
+
+@staff_member_required(login_url='error')
+class staff_view(View):
+    initial = {'key': 'value'}
+    html = 'document.html'
+
+
+    def get(self, request, *args, **kwargs):
+        form = self.file_form(request.user.kropboxuser, initial=self.initial)
+        return render(request, self.html, {'form':form})
