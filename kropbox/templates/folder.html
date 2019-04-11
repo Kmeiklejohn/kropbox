@@ -12,37 +12,22 @@
         <title>Kropbox</title>
     </head>
     <body>
-
-
         <div>
-            <h1>{{ user }}'s Submissions</h1>
+            <h1>{{ user }}'s </h1>
+            <div>
+                <h2>Current Folder</h2>
+                {{ data.currentfolder }}
+                {% for child in data.children %}
+                    <li><a href="/folder/{{ child.id }}">{{ child.name }}</a></li>
+                    {% for file in data %}
+                        <li><a href="{{ file }}">{{ file.name }}</a></li>
+                    {% endfor %}
+                {% endfor %}
+            </div> 
+              
         <br>
-        <div>****************************</div>
-        <div>user = {{ user }}</div>
-        <div>---</div>
-        <div>user_id = {{ user_id }}</div>
-        <div>---</div>
-        <div>kropbox_user = {{ kropbox_user }}</div>
-        <div>---</div>
-        <div>myfolder_list = {{ myfolder_list }}</div>
-        <div>---</div>
-        <div>folder_list = {{ folder_list }}</div>
-        <div>---</div>
-        <div>object_list = {{ object_list }}</div>
-        <div>---</div>
-        <div>myfiles = {{ myfiles }}</div>
-        <div>---</div>
-        <div>descendantfiles = {{ descendantfiles }}</div>
-        <div>---</div>
-        <div>descendantfiles2 = {{ descendantfiles2 }}</div>
-        <div>---</div>
-        <div>myobjects = {{ myobjects }}</div>
-        <div>---</div>
-        <div>myobject_list = {{ myobject_list }}</div>
-        <div>---</div>
-        <div>myitem_list = {{ myitem_list }}</div>
-        <div>---</div>
-
+        <br>
+        <br>
 
         <form action='/add_folder/' method="">
 
