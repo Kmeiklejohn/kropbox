@@ -15,22 +15,36 @@
 
 
         <div>
-            <h1>{{ selected_user }}'s Submissions</h1>
-
-            <h3>objects in folder_list</h3>
+            <h1>{{ user }}'s Submissions</h1>
+            **********************
+            <h3>folders in data.children</h3>
+            <div>
+                {% for folder in data.children %}
+                <li>{{ folder.name }}</li>
+                {% endfor %}
+            </div>
+            **********************
+            <h3>files in current folder</h3>
+            <div>
+                {% for file in files %}
+                <li>{{ file.name }}</li>
+                {% endfor %}
+            </div>
+            **********************
+            <!-- <h3>objects in folder_list</h3>
             <div>
                 {% for folder in folder_list %}
                 <li>{{ folder.name }}</li>
                 {% endfor %}
             </div>
-            **********************
-            <h3>objects in object_list</h3>
+            ********************** -->
+            <!-- <h3>objects in object_list</h3>
             <div>
                 {% for object in object_list %}
                 <li>{{ object.name }}</li>
                 {% endfor %}
             </div>
-            **********************
+            ********************** -->
             <h3>objects in myfolder_list</h3>
             <div>
                 {% for object in myfolder_list %}
@@ -38,17 +52,17 @@
                 {% endfor %}
             </div>
             **********************
-            <h3>objects in myfiles</h3>
+            <!-- <h3>objects in myfiles</h3>
             <div>
                 {% for object in myfiles %}
-                    <!-- <li>{{ object }}</li> -->
+                    <li>{{ object }}</li>
                     {% for item in object %}
                         <li>{{ item }}</li>
                     {% endfor %}
                     <div>---------------------</div>
                 {% endfor %}
             </div>
-            **********************
+            ********************** -->
             <h3>objects in myobjects</h3>
             <div>
                 {% for object in myobjects %}
@@ -56,7 +70,7 @@
                 {% endfor %}
             </div>
             **********************
-            <h3>objects in descendantfiles</h3>
+            <!-- <h3>objects in descendantfiles</h3>
             <div>
                 {% for object in descendantfiles %}
                     <li>{{ object }}</li>
@@ -65,8 +79,8 @@
                     {% endfor %}
                 {% endfor %}
             </div>
-            **********************
-            <h3>objects in descendantfiles2</h3>
+            ********************** -->
+            <!-- <h3>objects in descendantfiles2</h3>
             <div>
                 {% for object in descendantfiles2 %}
                     <li>{{ object }}</li>
@@ -75,7 +89,7 @@
                     {% endfor %}
                 {% endfor %}
             </div>
-            **********************
+            ********************** -->
             <h3>objects in myitem_list</h3>
             <div>
                 {% for object in myitem_list %}
@@ -88,7 +102,7 @@
             **********************
             
         </div>
-        <div>
+        <!-- <div>
             {% load mptt_tags %}
             <ul>
             ********************
@@ -105,8 +119,8 @@
                 {% endrecursetree %}
             ********************
             </ul>
-        </div>
-        <div>
+        </div> -->
+        <!-- <div>
             {% load mptt_tags %}
             <ul>
             ********************
@@ -124,7 +138,7 @@
             ********************
            
             </ul>
-        </div>
+        </div> -->
         <br>
         <div>
             <h2>Public files:</h2>
@@ -141,8 +155,6 @@
         <div>myfolder_list = {{ myfolder_list }}</div>
         <div>---</div>
         <div>folder_list = {{ folder_list }}</div>
-        <div>---</div>
-        <div>object_list = {{ object_list }}</div>
         <div>---</div>
         <div>myfiles = {{ myfiles }}</div>
         <div>---</div>
