@@ -37,16 +37,28 @@
                 <li>{{ object.name }}</li>
                 {% endfor %}
             **********************
-            <h3>objects in myobject_list</h3>
+            <h3>objects in myfiles</h3>
             <div>
-                {% for object in myobject_list %}
-                <li>{{ object.name }}</li>
+                {% for object in myfiles %}
+                    <li>{{ object }}</li>
+                    {% for item in object %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                    <div>---------------------</div>
+                {% endfor %}
+            </div>
+            **********************
+            <h3>objects in descendantfiles</h3>
+            <div>
+                {% for object in descendantfiles %}
+                    <li>{{ object }}</li>
+                    {% for item in object %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
                 {% endfor %}
             </div>
             **********************
         </div>
-
-
         <div>
             {% load mptt_tags %}
             <ul>
@@ -91,11 +103,21 @@
         <br>
         <div>****************************</div>
         <div>user = {{ user }}</div>
+        <div>---</div>
         <div>user_id = {{ user_id }}</div>
+        <div>---</div>
         <div>kropbox_user = {{ kropbox_user }}</div>
+        <div>---</div>
         <div>myfolder_list = {{ myfolder_list }}</div>
+        <div>---</div>
         <div>folder_list = {{ folder_list }}</div>
+        <div>---</div>
         <div>object_list = {{ object_list }}</div>
+        <div>---</div>
+        <div>myfiles = {{ myfiles }}</div>
+        <div>---</div>
+        <div>descendantfiles = {{ descendantfiles }}</div>
+        <div>---</div>
 
         <form action='/add_folder/' method="">
 
