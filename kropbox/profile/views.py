@@ -80,12 +80,6 @@ def profile_view(request):
     context = {
         'KropboxUser': KropboxUser,
         'user': user,
-        'data': data,
-    }
-
-    context = {
-        'KropboxUser': KropboxUser,
-        'user': user,
         'user_id': user_id,
         'kropbox_user': kropbox_user,
         'myfolder_list': myfolder_list,

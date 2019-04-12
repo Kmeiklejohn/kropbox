@@ -20,7 +20,7 @@
             **********************
             <h3>Files</h3>
             <div>
-                {% for object in object_list %}
+                {% for object in data.files %}
                 <li><a href="{{ object.document.url }}">{{ object.name }}</a></li>
                 {% endfor %}
             </div>
