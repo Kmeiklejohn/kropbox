@@ -19,7 +19,7 @@
                 {{ data.currentfolder }}
                 {% for child in data.children %}
                     <li><a href="/folder/{{ child.id }}">{{ child.name }}</a></li>
-                    {% for file in data %}
+                    {% for file in data.files %}
                         <li><a href="{{ file }}">{{ file.name }}</a></li>
                     {% endfor %}
                 {% endfor %}

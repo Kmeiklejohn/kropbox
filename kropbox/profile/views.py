@@ -67,10 +67,9 @@ def profile_view(request):
     user = request.user
     user_id = request.user.id
     kropbox_user = request.user.kropboxuser.name
-    myfolder_list = Folder.objects.filter(owner=request.user.kropboxuser)
-    object_list = FileObject.objects.all()
-    homefolder = Folder.objects.filter(owner=request.user.kropboxuser).filter(name='home').first()
-    potentialfolder = Folder.objects.filter(owner=request.user.kropboxuser).filter(id=user_id).first()
+    # myfolder_list = Folder.objects.filter(owner=request.user.kropboxuser)
+    # object_list = FileObject.objects.all()
+    potentialfolder = Folder.objects.filter(owner=request.user.kropboxuser).filter(name='home').first()
     data = {
         'currentfolder': potentialfolder,
         'files': FileObject.objects.filter(folder=potentialfolder),
@@ -82,10 +81,10 @@ def profile_view(request):
         'user': user,
         'user_id': user_id,
         'kropbox_user': kropbox_user,
-        'myfolder_list': myfolder_list,
-        'object_list': object_list,
+        # 'myfolder_list': myfolder_list,
+        # 'object_list': object_list,
         'data': data,
-        'homefolder': homefolder,
+        # 'homefolder': homefolder,
     }
     return render(request, 'profile.html', context)
 
