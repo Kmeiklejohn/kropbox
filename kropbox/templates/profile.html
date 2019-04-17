@@ -16,16 +16,16 @@
 
         <div>
             <h2>Hey {{user}}!</h2>
-            <p>Can we have all of your data?</p>
+            <p>Can we have your data?</p>
             **********************
             <h3>Files</h3>
             <div>
-                {% for object in object_list %}
+                 {% for object in data.files %}
                 <li><a href="{{ object.document.url }}">{{ object.name }}</a></li>
                 {% endfor %}
             </div>
             **********************
-            <h3>Home Folder</h3>
+            <h3>Folders</h3>
             <div>
                 {{ homefolder }}
                 {% for child in data.children %}

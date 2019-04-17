@@ -23,10 +23,12 @@ from kropbox.manager.urls import urlpatterns as manager_urls
 from kropbox.views import *
 from django.conf.urls import handler404, handler500, url
 
-
 urlpatterns = [
     path('admin/', admin.site.urls)
 ]
 
 urlpatterns += profile_urls
 urlpatterns += manager_urls
+
+handler404 = 'kropbox.views.error_404'
+handler500 = 'kropbox.views.error_500'

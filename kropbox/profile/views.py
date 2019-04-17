@@ -8,6 +8,7 @@ from django.shortcuts import reverse
 from kropbox.profile.models import KropboxUser
 from kropbox.profile.forms import SignupForm, LoginForm
 from kropbox.manager.models import Folder, FileObject
+from django.views import View
 
 def signup_view(request):
     html = 'genericForm.html'
@@ -58,19 +59,18 @@ def logout_view(request):
     logout(request)
     return HttpResponseRedirect(request.GET.get('next', '/'))
 
-def home_view(request):
-    
-    return render(request, 'home.html')
+class HomeView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'home.html')
 
 @login_required()
 def profile_view(request):
     user = request.user
-    user_id = request.user.id
     kropbox_user = request.user.kropboxuser.name
     myfolder_list = Folder.objects.filter(owner=request.user.kropboxuser)
     object_list = FileObject.objects.all()
     homefolder = Folder.objects.filter(owner=request.user.kropboxuser).filter(name='home').first()
-    potentialfolder = Folder.objects.filter(owner=request.user.kropboxuser).filter(id=user_id).first()
+    potentialfolder = Folder.objects.filter(owner=request.user.kropboxuser).filter(name='home').first()
     data = {
         'currentfolder': potentialfolder,
         'files': FileObject.objects.filter(folder=potentialfolder),
@@ -80,15 +80,7 @@ def profile_view(request):
     context = {
         'KropboxUser': KropboxUser,
         'user': user,
-        'data': data,
-    }
-
-    context = {
-        'KropboxUser': KropboxUser,
-        'user': user,
-        'user_id': user_id,
         'kropbox_user': kropbox_user,
-        'myfolder_list': myfolder_list,
         'object_list': object_list,
         'data': data,
         'homefolder': homefolder,
@@ -97,25 +89,27 @@ def profile_view(request):
 
 @login_required()
 def folder_view(request, id):
-    
     user = request.user
-    user_id = request.user.id
-    kropbox_user = request.user.kropboxuser.name
     folder_list = Folder.objects.all()
     myfolder_list = Folder.objects.filter(owner=request.user.kropboxuser)
     object_list = FileObject.objects.all()
     potentialfolder = Folder.objects.filter(owner=request.user.kropboxuser).filter(id=id).first()
     data = {
-        'currentfolder': potentialfolder,
-        'files': FileObject.objects.filter(folder=potentialfolder),
-        'children': potentialfolder.get_children(),
+       'currentfolder': potentialfolder,
+       'files': FileObject.objects.filter(folder=potentialfolder),
+       'children': potentialfolder.get_children(),
     }
 
+    structure = {
+        'documents': data['files']
+
+    }
 
     context = {
         'KropboxUser': KropboxUser,
         'user': user,
-        'data': data
+        'data': data,
+        'structure': structure
     }
     return render(request, 'folder.html', context)
 

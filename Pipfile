@@ -9,8 +9,8 @@ verify_ssl = true
 django = "*"
 django-mptt = "*"
 django-mptt-admin = "*"
-django-filter = "*"
 python-dotenv = "*"
+bootstrap4 = "*"
 
 [requires]
 python_version = "3.7"

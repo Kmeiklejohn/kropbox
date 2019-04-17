@@ -25,7 +25,7 @@ SECRET_KEY = dotenv.load_dotenv(
     os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env')
 ) 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_filters',
     'kropbox.profile',
     'kropbox.manager',
+    'bootstrap4',
     'mptt',
     'django_mptt_admin'
 ]

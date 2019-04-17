@@ -15,19 +15,25 @@
         <div>
             <h1>{{ user }}'s </h1>
             <div>
-                <h2>Current Folder</h2>
-                {{ data.currentfolder }}
+                <h3>Current Folder - {{ data.currentfolder }}</h3>
+    
                 {% for child in data.children %}
                     <li><a href="/folder/{{ child.id }}">{{ child.name }}</a></li>
-                    {% for file in data %}
-                        <li><a href="{{ file }}">{{ file.name }}</a></li>
-                    {% endfor %}
+                {% endfor %}
+                <h4>Files</h4>
+                {% for document in structure.documents %}
+                    <li><a href="{{ document.document.url }}">{{document.name}}</li>
                 {% endfor %}
             </div> 
               
         <br>
         <br>
         <br>
+        <form action='/profile/' method="GET">
+        <button action='/profile/'>
+        profile
+        </button>
+        </form>
 
         <form action='/add_folder/' method="">
 
